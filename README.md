@@ -31,7 +31,7 @@ await代码中抛出异常后，异常会沿着Task方向前进到引用处
 
 ## 异步编程基础
 指数退避是一种重试策略，重试的延迟时间会逐 次增加。在访问 Web 服务时，最好的方式就是采用指数退避，它可以防止服务器被太多的重试阻塞
-``` java
+``` C#
 static async Task<string> DownloadStringWithRetries(string uri)
 {
     using (var client = new HttpClient())
@@ -65,7 +65,7 @@ Task.WhenAny可以等待任一任务完成，使用它虽然可以完成超时�
 
 ## 并行开发的基础
 Parallel 类有一个简单的成员 Invoke，可用于需要并行调用一批方法，并且这些方法（大部分）是互相独立的
-``` java
+``` C#
 static void ProcessArray(double[] array)
 {
     Parallel.Invoke(
@@ -85,7 +85,7 @@ static void ProcessPartialArray(double[] array, int begin, int end)
 MSTest从Visual Studio2012 版本开始支持 async Task 类型的单元测试
 如果单元测试框架不支持 async Task 类型的单元测试，就需要做一些额外的修改才能等待异步操作。其中一种做法是使用 Task.Wait，并在有错误时拆开 AggregateException 对象。我的建议是使用 NuGet 包 Nito.AsyncEx 中的 AsyncContext 类
 这里附上一个ABP中实现的可操作AsyncHelper类，就是基于AsyncContext实现
-``` java
+``` C#
 
     /// <summary>
     /// Provides some helper methods to work with async methods.
@@ -142,7 +142,7 @@ ConcurrentDictionary 内置了AddOrUpdate, TryRemove, TryGetValue等方法。如
 可以用await等待的是一个类（如Task 对象），而不是一个方法。可以用await等待某个方法返回的Task，无论它是不是async方法。
 
 类的构造函数里是不能进行异步操作的，一般可以使用如下方法。相应的，我们可以通过
-``` java
+``` C#
 var instance=new Program.CreateAsync();
 
     class Program
@@ -178,7 +178,7 @@ var instance=new Program.CreateAsync();
 这几段代码在访问（读或写）同一个数据
 至少有一段代码在修改（写）数据
 观察以下代码，确定其同步和运行状态
-``` java
+``` C#
 class SharedData
 {
     public int Value { get; set; }
@@ -223,7 +223,7 @@ async Task<int> ModifyValueConcurrentlyAsync()
 ## 实用技巧
 
 程序的多个部分共享了一个资源，现在要在第一次访问该资源时对它初始化
-``` java
+``` C#
 static int _simpleValue;
 static readonly Lazy<Task<int>> MySharedAsyncInteger = 
     new Lazy<Task<int>>(() => 
