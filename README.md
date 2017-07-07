@@ -239,3 +239,62 @@ async Task GetSharedIntegerAsync()
     int sharedValue = await MySharedAsyncInteger.Value;
 }
 ```
+[改编《C#并发编程经典实例》笔记](http://www.itnose.net/detail/6649731.html)
+
+
+
+
+## Async与Await的使用 [官网解义](https://docs.microsoft.com/zh-cn/dotnet/csharp/programming-guide/concepts/async/index)
+使用异步多线程有多种方式，最常用的有Thread来实现多线程异步处理，在Framework4.5以后有了Async和Await像写同步方法一样写异步,代码清爽简单
++ ThreadAsync.cs 使用Thread发起线程
++ AsyncAndAwait.cs 使用Async和Await实现Thread相同的方法 
+
+显而易见在AsyncAndAwait.cs中代码思路更简洁清晰,运行结果一样<br />
+只有在使用Async关键词的类中才能在方法内部使用Await,在异步方法中可以使用Task，Task<T>,void的返回类型<br />
+关键词Await则是用于返回值为“可等待”类型的方法
+
+
++ Async Await
+[官网解义](https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/keywords/async)
+使用Async修饰符可将方法、Lambda表达式以及匿名方法指定为异步。
+``` C#
+public async Task<T> ExampleMethodAsync()  
+{  
+    // . . . .  
+}
+```
+如果异步方法指定是一个TResult的类型结果，则应该指定Task<TResult>为返回类型。<br />
+如果异步方法返回一个无意义的内容，应使用Task，并且返回类型为void。
+
++ Task
+
+
+## 异步和多线程的区别
+异步和多线程都可以达到提高软件的可相应性，达到避免调用线程阻塞的问题。但是这两者还是有一定的区别的，而这些区别就是造成了使用异步和多线程的本质区别。
++ 异步和多线程的区别之异步操作本质
++ 异步和多线程的区别之线程的本质
++ 异步和多线程的区别之多线程的优缺点
+
+以上三个点看的不是很明白但是有一点概念 [传送门](http://www.cnblogs.com/tianzhiliang/archive/2010/08/31/1813629.html)
+
+适用范围
+
++ 当需要执行I/O操作时，使用异步操作比使用线程+同步 I/O操作更合适。I/O操作不仅包括了直接的文件、网络的读写，还包括数据库操作、Web Service、HttpRequest以及.net Remoting等跨进程的调用。
+
++ 而线程的适用范围则是那种需要长时间CPU运算的场合，例如耗时较长的图形处理和算法执行。但是往 往由于使用线程编程的简单和符合习惯，所以很多朋友往往会使用线程来执行耗时较长的I/O操作。这样在只有少数几个并发操作的时候还无伤大雅，如果需要处 理大量的并发操作时就不合适了。
+
+### 案例
+异步和多线程的区别实例：由delegate产生的异步方法到底是怎么回事？<br />
+大家可能都知道，使用delegate可以“自动”使一个方法可以进行异步的调用。从直觉上来说，我觉得是由编译器或者CLR使用了另外的线程来执行目标方法。到底是不是这样呢？让我们来用一段代码证明一下吧。
++ AsyncDelegateDemo.cs
+
+
+## 浅谈多线程和异步
+http://www.cnblogs.com/tianqing/p/6970331.html
+
+
+
+## 张占岭大叔聊 [异步与并行](http://www.cnblogs.com/lori/p/5530274.html)
+
+
+## C#并行和多线程编程系列 [雲霏霏](http://www.cnblogs.com/yunfeifei/p/3993401.html)
